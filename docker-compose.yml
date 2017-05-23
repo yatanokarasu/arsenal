@@ -7,6 +7,7 @@ services:
   # MySQL Server for Sonarqube
   mysql:
     image: mysql:5.7
+    container_name: mysql-server
     expose:
       - "3306"
     environment:
@@ -19,6 +20,7 @@ services:
   # Sonarqube that provides functions to analyze source code
   sonarqube:
     image: sonarqube:6.3.1-alpine
+    container_name: sonarqube
     expose:
       - "9000"
     environment:
@@ -31,6 +33,7 @@ services:
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
+    container_name: nginx
     ports:
       - "80:80"
     volumes:
