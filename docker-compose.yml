@@ -1,0 +1,39 @@
+
+version: "3"
+
+
+services:
+
+  # MySQL Server for Sonarqube
+  mysql:
+    image: mysql:5.7
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "./mysql/initdb.d:/docker-entrypoint-initdb.d"
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci --explicit-defaults-for-timestamp=true --skip-name-resolve=true
+
+
+  # Sonarqube that provides functions to analyze source code
+  sonarqube:
+    image: sonarqube:6.3.1-alpine
+    expose:
+      - "9000"
+    environment:
+      SONARQUBE_JDBC_URL: "jdbc:mysql://mysql/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
+    command: -Dsonar.web.context=/sonarqube
+    depends_on:
+      - mysql
+
+
+  # Reverse proxy
+  nginx:
+    image: nginx:1.13.0-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+    depends_on:
+      - sonarqube
