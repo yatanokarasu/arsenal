@@ -24,10 +24,20 @@ services:
     expose:
       - "9000"
     environment:
-      SONARQUBE_JDBC_URL: "jdbc:mysql://mysql/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
+      SONARQUBE_JDBC_URL: "jdbc:mysql://mysql-server/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     command: -Dsonar.web.context=/sonarqube
     depends_on:
       - mysql
+
+
+  # Sonatype Nexus3 as inhouse repositories
+  nexus:
+    image: sonatype/nexus3
+    container_name: sonatype-nexus
+    expose:
+      - "8081"
+    environment:
+      NEXUS_CONTEXT:           nexus
 
 
   # Reverse proxy
@@ -40,3 +50,4 @@ services:
       - "./nginx/conf.d:/etc/nginx/conf.d"
     depends_on:
       - sonarqube
+      - nexus
