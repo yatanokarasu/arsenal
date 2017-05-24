@@ -37,7 +37,7 @@ services:
     expose:
       - "8081"
     environment:
-      NEXUS_CONTEXT:           nexus
+      NEXUS_CONTEXT: nexus
 
 
   # Reverse proxy
