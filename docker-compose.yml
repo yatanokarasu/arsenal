@@ -40,6 +40,28 @@ services:
       NEXUS_CONTEXT: nexus
 
 
+  # Redmine
+  redmine:
+    image: sameersbn/redmine
+    container_name: redmine
+    expose:
+      - "8080"
+    environment:
+      # DB configurations
+      DB_HOST: mysql-server
+      DB_NAME: redmine
+      DB_USER: redmine
+      DB_PASS: redmine
+      # Web
+      REDMINE_RELATIVE_URL_ROOT: /redmine
+      NGINX_ENABLED:             "false"
+    volumes:
+      - "./redmine/plugins:/home/redmine/data/plugins"
+      - "./redmine/themes:/home/redmine/data/themes"
+    depends_on:
+      - mysql
+
+
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
@@ -51,3 +73,4 @@ services:
     depends_on:
       - sonarqube
       - nexus
+      - redmine
