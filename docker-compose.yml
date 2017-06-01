@@ -62,6 +62,16 @@ services:
       - mysql
 
 
+  # Knowledge
+  knowledge:
+    build: knowledge
+    container_name: knowledge
+    expose:
+      - "8080"
+    volumes:
+      - /root/.knowledge
+
+
   # Gitbucket
   gitbucket:
     build: gitbucket
@@ -91,3 +101,4 @@ services:
       - nexus
       - redmine
       - gitbucket
+      - knowledge
