@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Arsenal</title>
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+    <style type="text/css">
+
+* {
+    margin:             0;
+    padding:            0;
+
+    box-sizing:         border-box;
+    text-decoration:    none;
+
+    font-family:        Nunito;
+}
+
+
+html, body {
+    height:             100%;
+}
+
+
+body, .opaque-glass:before {
+    background:         url(bkg.jpg) no-repeat fixed;
+    background-size:    cover;
+}
+
+
+.opaque-glass, .opaque-glass:before {
+    margin:             0 auto;
+
+    position:           fixed;
+    top:                0;
+    left:             -30px;
+    right:            -30px;
+    bottom:             0;
+
+    max-width:          900px;
+    height:             100%;
+    z-index:           -1;
+}
+
+
+.opaque-glass {
+    box-shadow:         0px 0px 10px 0px #aaa;
+}
+
+
+.opaque-glass:before {
+    content:            '';
+
+    overflow:           hidden;
+    filter:             blur(30px);
+}
+
+
+.container {
+    margin:             0 auto;
+    padding:            50px;
+    max-width:          900px;
+}
+
+
+.title {
+    font-size:          4em;
+}
+
+
+.flex-container {
+    margin-top:         30px;
+
+    display:            flex;
+
+    -webkit-flex-wrap:  wrap;
+    -moz-flex-wrap:     wrap;
+    -ms-flex-wrap:      wrap;
+    -o-flex-wrap:       wrap;
+    flex-wrap:          wrap;
+
+    justify-content:    space-around;
+    align-conent:       stretch;
+}
+
+
+.flex-item, .flex-item:before {
+    width:              200px;
+    height:             200px;
+}
+
+
+.flex-item {
+    margin-bottom:      10px;
+    padding:            10px;
+    position:           relative;
+}
+
+
+.flex-item:before {
+    content:            '';
+
+    background-color:   #000;
+    opacity:            0;
+
+    margin-top:         -10px;
+    margin-left:        -10px;
+
+    position:           absolute;
+    z-index:            -1;
+}
+
+
+.flex-item:before:hover {
+    opacity:            0.3;
+}
+
+
+.item-title {
+    font-size:          2em;
+    text-align:         center;
+
+    position:           relative;
+    padding-bottom:     10px;
+    z-index:            5;
+}
+
+
+.flex-item p {
+    text-align:         center;
+    z-index:            10;
+}
+
+.flex-item img {
+    height:              100px;
+}
+
+.flex-item a {
+    width:              100%;
+    height:             100%;
+    position:           absolute;
+    top:                0;
+    left:               0;
+}
+
+.flex-item:hover {
+    background-color:   white;
+    box-shadow:         0 0 10px 0 #888;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="opaque-glass"></div>
+
+    <div class="container">
+        <h1 class="title">Memoizer</h1>
+
+        <div class="flex-container">
+            <div class="flex-item">
+                <h2 class="item-title">Redmine</h2>
+                <p><img src="redmine.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Gitbucket</h2>
+                <p><img src="gitbucket.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Knowledge</h2>
+                <p><img src="knowledge.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Sonarqube</h2>
+                <p><img src="sonarqube.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Nexus</h2>
+                <p><img src="nexus.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Rundeck</h2>
+                <p><img src="rundeck.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Jenkins</h2>
+                <p><img src="jenkins.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Rancher</h2>
+                <p><img src="rancher.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+            <div class="flex-item">
+                <h2 class="item-title">Jupyterhub</h2>
+                <p><img src="jupyterhub.png"/></p>
+                <a href="#" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
