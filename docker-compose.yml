@@ -88,6 +88,16 @@ services:
       - mysql
 
 
+  # Rundeck
+  rundeck:
+    build: rundeck
+    container_name: rundeck
+    expose:
+      - "4440"
+    depends_on:
+      - mysql
+
+
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
@@ -96,6 +106,7 @@ services:
       - "80:80"
     volumes:
       - "./nginx/conf.d:/etc/nginx/conf.d"
+      - "./nginx/html:/usr/share/nginx/html"
     depends_on:
       - sonarqube
       - nexus
