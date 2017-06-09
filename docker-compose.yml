@@ -98,6 +98,18 @@ services:
       - mysql
 
 
+  # Jenkins
+  jenkins:
+    image: jenkins:latest
+    container_name: jenkins
+    expose:
+      - "8080"
+    volumes:
+      - "/var/jenkins_home"
+    environment:
+      JENKINS_OPTS: "--prefix=/jenkins"
+
+
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
@@ -113,3 +125,4 @@ services:
       - redmine
       - knowledge
       - gitbucket
+      - jenkins
