@@ -110,6 +110,17 @@ services:
       JENKINS_OPTS: "--prefix=/jenkins"
 
 
+  # Rancher
+  rancher:
+    image: rancher/server
+    container_name: rancher
+    ports:
+      - "58080:8080"
+    command: --db-host mysql-server
+    depends_on:
+      - mysql
+
+
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
@@ -126,3 +137,4 @@ services:
       - knowledge
       - gitbucket
       - jenkins
+      - rancher
