@@ -121,6 +121,31 @@ services:
       - mysql
 
 
+  # elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+    container_name: elasticsearch
+    hostname:       elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      http.host:              "0.0.0.0"
+      transport.host:         "127.0.0.1"
+      xpack.security.enabled: "false"
+
+
+  # kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.4.1
+    container_name: kibana
+    hostname:       kibana
+    ports:
+      - "55601:5601"
+    depends_on:
+      - elasticsearch
+
+
   # Reverse proxy
   nginx:
     image: nginx:1.13.0-alpine
@@ -139,3 +164,4 @@ services:
       - rundeck
       - jenkins
       - rancher
+      - kibana
