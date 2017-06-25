@@ -114,20 +114,31 @@
 .button-link:hover {
     background-color :  #efefef;
 
-    transition:         background-color 0.4s ease;
-    -o-transition:      background-color 0.4s ease;
-    -ms-transition:     background-color 0.4s ease;
-    -webkit-transition: background-color 0.4s ease;
+    transition:         all .6s ease;
+    -o-transition:      all .6s ease;
+    -ms-transition:     all .6s ease;
+    -webkit-transition: all .6s ease;
+
+    box-shadow:         0 3px 10px #ccc;
+}
+
+.button-link:hover .item-title {
+    text-shadow:        1px 1px 1px #aaa;
+
+    transition:         all .6s ease;
+    -o-transition:      all .6s ease;
+    -ms-transition:     all .6s ease;
+    -webkit-transition: all .6s ease;
 }
 
 .button-link:hover:before,
 .button-link:hover:after,
 .button-link:hover .item-content:before,
 .button-link:hover .item-content:after {
-    transition:         all 0.1s ease;
-    -o-transition:      all 0.1s ease;
-    -ms-transition:     all 0.1s ease;
-    -webkit-transition: all 0.1s ease;
+    transition:         all .3s ease;
+    -o-transition:      all .3s ease;
+    -ms-transition:     all .3s ease;
+    -webkit-transition: all .3s ease;
 }
 
 .button-link:hover:before,
@@ -138,18 +149,6 @@
 .button-link:hover:after,
 .button-link:hover .item-content:after {
     height:             100%;
-}
-
-.button-link:hover:after {
-    transition-delay:   .4s;
-}
-
-.button-link:hover .item-content:before {
-    transition-delay:   .3s;
-}
-
-.button-link:hover .item-content:after {
-    transition-delay:   .2s;
 }
 
 .item-title {
