@@ -16,8 +16,8 @@ RUN \
     pip install ansible bash_kernel && \
 
     # install pandoc, asciidoc, xvfb and wkhtmltopdf
-    #conda install -y pandoc && \
-    #apt-get install -y asciidoc asciidoctor xvfb wkhtmltopdf && \
+    conda install -y pandoc && \
+    apt-get install -y asciidoc asciidoctor xvfb wkhtmltopdf && \
 
     # install ijavascript and itypescript
     apt-get install -y nodejs-legacy npm && \
@@ -65,16 +65,18 @@ RUN \
     apt-get update -y && \
     apt-get upgrade -y && \
     ( \
-        echo 'export JAVA_HOME="/usr/lib/jvm/openjdk-8-openjdk-amd64"' \
+        echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' \
         echo 'export PATH="$PATH:$JAVA_HOME/bin"' \
     ) >>/etc/profile.d/openjdk.sh && \
+    . /etc/profile.d/openjdk.sh && \
     apt-get install -y -t jessie-backports openjdk-8-jdk && \
     cd /tmp && \
     git clone https://github.com/ligee/kotlin-jupyter && \
-    cd kotlin && \
+    cd kotlin-jupyter && \
     mkdir -p /opt/kotlin-jupyter && \
     ./gradlew install -PinstallPath=/opt/kotlin-jupyter && \
-    cp -r /root/.ipython/kernels/kotlin /etc/skel/.local/share/jupyter/kernels/ && \
+    mkdir -p /etc/skel/.local/share/jupyter/kernels/kotlin && \
+    cp -r /opt/kotlin-jupyter/kernel.json /etc/skel/.local/share/jupyter/kernels/kotlin/ && \
 
     # create skel and admin user(passwd: 'admin') can sudo
     useradd -G root -m -s /bin/bash admin && \
