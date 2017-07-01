@@ -20,7 +20,7 @@ services:
 
   # Sonarqube that provides functions to analyze source code
   sonarqube:
-    image: sonarqube:6.3.1-alpine
+    build: sonarqube
     container_name: sonarqube
     expose:
       - "9000"
@@ -28,7 +28,7 @@ services:
       SONARQUBE_JDBC_URL: "jdbc:mysql://mysql-server/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     command: -Dsonar.web.context=/sonarqube
     volumes:
-      - "/var/lib/docker/volumes/sonarqube:/opt/sonarqube/data"
+      - "/var/lib/docker/volumes/sonarqube:/opt/sonarqube"
     depends_on:
       - mysql
 
