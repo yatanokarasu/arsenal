@@ -5,6 +5,8 @@ EXPOSE 4440
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
+VOLUME /opt/rundeck/server/config
+
 RUN \
     chmod +x /usr/local/bin/docker-entrypoint.sh && \
     mkdir -p /opt/rundeck  && \
@@ -18,8 +20,6 @@ RUN \
         -e '/dataSource.url/a\dataSource.password = rundeck' \
         -e '/dataSource.url/a\dataSource.username = rundeck' \
         /opt/rundeck/server/config/rundeck-config.properties
-
-VOLUME /etc/rundeck
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["java", "-Dserver.web.context=/rundeck", "-jar", "/opt/rundeck/rundeck.jar"]

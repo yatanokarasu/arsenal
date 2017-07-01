@@ -3,6 +3,8 @@ FROM jupyterhub/jupyterhub
 
 EXPOSE 8000
 
+VOLUME /home
+
 RUN \
     apt-get update -y && \
     apt-get upgrade -y && \

@@ -13,6 +13,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
+      - "/var/lib/docker/volumes/mysql:/var/lib/mysql"
       - "./mysql/initdb.d:/docker-entrypoint-initdb.d"
     command: --character-set-server=utf8 --collation-server=utf8_general_ci --explicit-defaults-for-timestamp=true --skip-name-resolve=true
 
@@ -26,6 +27,8 @@ services:
     environment:
       SONARQUBE_JDBC_URL: "jdbc:mysql://mysql-server/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     command: -Dsonar.web.context=/sonarqube
+    volumes:
+      - "/var/lib/docker/volumes/sonarqube:/opt/sonarqube/data"
     depends_on:
       - mysql
 
@@ -38,6 +41,8 @@ services:
       - "8081"
     environment:
       NEXUS_CONTEXT: nexus
+    volumes:
+      - "/var/lib/docker/volumes:/sonatype-work"
 
 
   # Redmine
@@ -56,8 +61,8 @@ services:
       REDMINE_RELATIVE_URL_ROOT: /redmine
       NGINX_ENABLED:             "false"
     volumes:
-      - "./redmine/plugins:/home/redmine/data/plugins"
-      - "./redmine/themes:/home/redmine/data/themes"
+      - "/var/lib/docker/volumes/redmine/plugins:/home/redmine/data/plugins"
+      - "/var/lib/docker/volumes/redmine/themes:/home/redmine/data/themes"
     depends_on:
       - mysql
 
@@ -71,7 +76,7 @@ services:
     environment:
       JAVA_OPTS: "-Djava.security.edg=file:///dev/urandom"
     volumes:
-      - /root/.knowledge
+      - "/var/lib/docker/volumes/knowledge:/root/.knowledge"
 
 
   # Gitbucket
@@ -86,6 +91,8 @@ services:
       MYSQL_DB_USER:     "gitbucket"
       MYSQL_DB_PASSWORD: "gitbucket"
     command: --prefix=/gitbucket
+    volumes:
+      - "/var/lib/docker/volumes/gitbucket:/root/.gitbucket"
     depends_on:
       - mysql
 
@@ -96,6 +103,8 @@ services:
     container_name: rundeck
     expose:
       - "4440"
+    volumes:
+      - "/var/lib/docker/volumes/rundeck:/opt/rundeck/server/config"
     depends_on:
       - mysql
 
@@ -107,7 +116,7 @@ services:
     expose:
       - "8080"
     volumes:
-      - "/var/jenkins_home"
+      - "/var/lib/docker/volumes/jenkins:/var/jenkins_home"
     environment:
       JENKINS_OPTS: "--prefix=/jenkins"
 
@@ -129,6 +138,8 @@ services:
     container_name: jupyterhub
     ports:
       - "58000:8000"
+    volumes:
+      - "/var/lib/docker/volumes/jupyterhub:/home"
 
 
   # Reverse proxy
@@ -138,5 +149,5 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "./nginx/conf.d:/etc/nginx/conf.d"
-      - "./nginx/html:/usr/share/nginx/html"
+      - "/var/lib/docker/volumes/nginx/conf.d:/etc/nginx/conf.d"
+      - "/var/lib/docker/volumes/nginx/html:/usr/share/nginx/html"
