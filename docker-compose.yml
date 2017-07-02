@@ -28,7 +28,8 @@ services:
       SONARQUBE_JDBC_URL: "jdbc:mysql://mysql-server/sonar?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
     command: -Dsonar.web.context=/sonarqube
     volumes:
-      - "/var/lib/docker/volumes/sonarqube:/opt/sonarqube"
+      - "/var/lib/docker/volumes/sonarqube/data:/opt/sonarqube/data"
+      - "/var/lib/docker/volumes/sonarqube/conf:/opt/sonarqube/conf"
     depends_on:
       - mysql
 
@@ -130,6 +131,12 @@ services:
     command: --db-host mysql-server
     depends_on:
       - mysql
+
+
+  # eclipse che
+  # docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock
+  #                     -v /var/lib/docker/che:/data
+  #                      eclipse/che start
 
 
   # Jupyterhub
