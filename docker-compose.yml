@@ -20,7 +20,7 @@ services:
 
   # Sonarqube that provides functions to analyze source code
   sonarqube:
-    build: sonarqube
+    image: sonarqube:6.3.1-alpine
     container_name: sonarqube
     expose:
       - "9000"
