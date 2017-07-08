@@ -37,13 +37,13 @@ services:
   # Sonatype Nexus3 as inhouse repositories
   nexus:
     image: sonatype/nexus3
-    container_name: sonatype-nexus
+    container_name: nexus
     expose:
       - "8081"
     environment:
       NEXUS_CONTEXT: nexus
     volumes:
-      - "/var/lib/docker/volumes:/sonatype-work"
+      - "/var/lib/docker/volumes/nexus:/sonatype-work"
 
 
   # Redmine

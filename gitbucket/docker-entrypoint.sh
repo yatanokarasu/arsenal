@@ -5,7 +5,7 @@ set -eo pipefail
 
 # if set env for MySQL JDBC Driver, create database.conf
 if [ "$MYSQL_DB_URL" -a "$MYSQL_DB_USER" -a "$MYSQL_DB_PASSWORD" ]; then
-    cat <<__EOF__ >/gitbucket/database.conf
+    cat <<__EOF__ >/root/.gitbucket/database.conf
 db {
     url      = "$MYSQL_DB_URL"
     user     = "$MYSQL_DB_USER"
