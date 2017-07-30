@@ -43,7 +43,8 @@ services:
     environment:
       NEXUS_CONTEXT: nexus
     volumes:
-      - "/var/lib/docker/volumes/nexus:/sonatype-work"
+      - "/var/lib/docker/volumes/nexus/work:/sonatype-work"
+      - "/var/lib/docker/volumes/nexus/data:/nexus-data"
 
 
   # Redmine
@@ -64,6 +65,8 @@ services:
     volumes:
       - "/var/lib/docker/volumes/redmine/plugins:/home/redmine/data/plugins"
       - "/var/lib/docker/volumes/redmine/themes:/home/redmine/data/themes"
+      - "/var/lib/docker/volumes/redmine/data:/home/redmine/data"
+      - "/var/lib/docker/volumes/redmine/logs:/var/log/redmine"
     depends_on:
       - mysql
 
@@ -128,15 +131,20 @@ services:
     container_name: rancher
     ports:
       - "58080:8080"
+    volumes:
+      - "/var/lib/docker/volumes/rancher/mysql/data:/var/lib/mysql"
+      - "/var/lib/docker/volumes/rancher/mysql/logs:/var/log/mysql"
+      - "/var/lib/docker/volumes/rancher/lib/cattle:/var/lib/cattle"
     command: --db-host mysql-server
     depends_on:
       - mysql
 
 
   # eclipse che
-  # docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock
-  #                     -v /var/lib/docker/che:/data
-  #                      eclipse/che start
+  # docker run -it --name che --rm
+  #            -v /var/run/docker.sock:/var/run/docker.sock
+  #            -v /var/lib/docker/volumes/che:/data
+  #            -e CHE_PORT=58081 eclipse/che start
 
 
   # Jupyterhub
@@ -144,7 +152,7 @@ services:
     build: jupyterhub
     container_name: jupyterhub
     ports:
-      - "58000:8000"
+      - "58082:8000"
     volumes:
       - "/var/lib/docker/volumes/jupyterhub:/home"
 
