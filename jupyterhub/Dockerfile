@@ -98,6 +98,7 @@ RUN \
     cd && \
     apt-get autoremove -y && \
     apt-get clean && \
+    npm cache clean && \
     rm -rf /var/lib/apt/list/* && \
     rm -rf /tmp/*
 
