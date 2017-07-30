@@ -22,7 +22,7 @@ RUN \
     apt-get install -y asciidoc asciidoctor xvfb wkhtmltopdf && \
 
     # install TeX
-    apt-get install -y texlive texlive-lang-cjk texlive-fonts-recommended texlive-fonts-extra xdvik-ja dvipsk-ja gv && \
+    apt-get install -y texlive texlive-xetex texlive-lang-cjk texlive-fonts-recommended texlive-fonts-extra xdvik-ja dvipsk-ja gv && \
 
     # install ijavascript and itypescript
     apt-get install -y nodejs-legacy npm && \
