@@ -141,7 +141,7 @@ services:
 
 
   # eclipse che
-  # docker run -it --name che --rm
+  # docker run -it --name che --network arsenal_default --rm
   #            -v /var/run/docker.sock:/var/run/docker.sock
   #            -v /var/lib/docker/volumes/che:/data
   #            -e CHE_PORT=58081 eclipse/che start
