@@ -21,6 +21,9 @@ RUN \
     conda install -y pandoc && \
     apt-get install -y asciidoc asciidoctor xvfb wkhtmltopdf && \
 
+    # install TeX
+    apt-get install -y texlive texlive-lang-cjk texlive-fonts-recommended texlive-fonts-extra xdvik-ja dvipsk-ja gv && \
+
     # install ijavascript and itypescript
     apt-get install -y nodejs-legacy npm && \
     npm install -g ijavascript itypescript && \
@@ -48,8 +51,8 @@ RUN \
 
     # install gopherlab
     ( \
-        echo 'export GOPATH="/opt/go"' \
-        echo 'export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"' \
+        echo 'export GOPATH="/opt/go"'; \
+        echo 'export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"'; \
     ) >>/etc/profile.d/golang.sh && \
     . /etc/profile.d/golang.sh && \
     ln -s /usr/local/go/bin/go /bin/ && \
@@ -67,8 +70,8 @@ RUN \
     apt-get update -y && \
     apt-get upgrade -y && \
     ( \
-        echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' \
-        echo 'export PATH="$PATH:$JAVA_HOME/bin"' \
+        echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"'; \
+        echo 'export PATH="$PATH:$JAVA_HOME/bin"'; \
     ) >>/etc/profile.d/openjdk.sh && \
     . /etc/profile.d/openjdk.sh && \
     apt-get install -y -t jessie-backports openjdk-8-jdk && \
@@ -86,8 +89,8 @@ RUN \
 
     # sudo configuration
     ( \
-        echo '%root ALL=(ALL) NOPASSWD: ALL' \
-        echo 'Defaults:%root !requiretty' \
+        echo '%root ALL=(ALL) NOPASSWD: ALL'; \
+        echo 'Defaults:%root !requiretty'; \
     ) >>/etc/sudoers.d/root && \
     chmod 440 /etc/sudoers.d/root && \
 
